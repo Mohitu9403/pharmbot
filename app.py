@@ -9,18 +9,19 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 
 
 
-app = Flask(__name__, template_folder="template")
+application = Flask(__name__, template_folder="template")
+app = application
 #create chatbot
 english_bot = ChatBot("Chatterbot", storage_adapter="chatterbot.storage.SQLStorageAdapter")
 trainer = ChatterBotCorpusTrainer(english_bot)
 trainer.train("chatterbot.corpus.english") #train the chatter bot for english
 
 #define app routes
-@app.route("/")
+@application.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/get")
+@application.route("/get")
 
 
 #function for the bot response
@@ -30,4 +31,4 @@ def get_bot_response():
 
 
 if __name__ == "__main__":
-    app.run()
+    application.run()
